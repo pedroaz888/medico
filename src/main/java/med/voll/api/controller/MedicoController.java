@@ -23,7 +23,6 @@ public class MedicoController {
     private MedicoRepository repository;
 
 
-
     @PostMapping
     @Transactional
     public void cadastrar(@RequestBody @Valid DadosCadastroMedico dados){
@@ -35,6 +34,40 @@ public class MedicoController {
     public Page<DadosListagemMedico> listar(@PageableDefault(size=10, page=0, sort ={"nome"}) Pageable paginacao){
         return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedico::new);
     }
+
+
+
+    @GetMapping("/busca")
+    @Transactional
+    public ResponseEntity<List <Medico>> buscarPeloNome(@RequestParam (name = "nome") String nome){
+
+        List<Medico> medico = repository.findByNome(nome.toUpperCase());
+
+        if(!medico.equals(nome)){
+            return new ResponseEntity<List<Medico>>(medico, HttpStatus.NOT_FOUND);
+        }else {
+
+            return new ResponseEntity<List<Medico>> (medico, HttpStatus.OK);
+
+        }
+    }
+
+
+//    List<ParkingSpotModel> parkingSpotModel = parkingSpotRepository.buscarPorProprietario(name.toUpperCase());
+//
+//        if(!parkingSpotModel.equals(name)) {
+//
+//        return new ResponseEntity<List<ParkingSpotModel>>(parkingSpotModel, HttpStatus.NOT_FOUND);
+//    }else {
+//
+//        return new ResponseEntity<List<ParkingSpotModel>>(parkingSpotModel, HttpStatus.OK);
+//    }
+//}
+
+
+
+
+
 
     @PutMapping
     @Transactional

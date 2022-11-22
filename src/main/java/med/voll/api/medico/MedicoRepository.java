@@ -12,7 +12,11 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
 
     Page<Medico> findAllByAtivoTrue(Pageable paginacao);
-}
 
+
+    @Query(value = "select m from Medico m where upper(m.nome) like %?1%")
+    List<Medico> findByNome(String nome);
+
+}
 
 
