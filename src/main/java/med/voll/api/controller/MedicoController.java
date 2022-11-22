@@ -53,22 +53,6 @@ public class MedicoController {
     }
 
 
-//    List<ParkingSpotModel> parkingSpotModel = parkingSpotRepository.buscarPorProprietario(name.toUpperCase());
-//
-//        if(!parkingSpotModel.equals(name)) {
-//
-//        return new ResponseEntity<List<ParkingSpotModel>>(parkingSpotModel, HttpStatus.NOT_FOUND);
-//    }else {
-//
-//        return new ResponseEntity<List<ParkingSpotModel>>(parkingSpotModel, HttpStatus.OK);
-//    }
-//}
-
-
-
-
-
-
     @PutMapping
     @Transactional
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
